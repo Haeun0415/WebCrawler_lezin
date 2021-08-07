@@ -10,18 +10,7 @@ url = 'https://www.lezhin.com'
 week = ['/ko/scheduled?day=1', '/ko/scheduled?day=2', '/ko/scheduled?day=3', '/ko/scheduled?day=4', '/ko/scheduled?day=5', '/ko/scheduled?day=6', '/ko/scheduled?day=0', '/ko/scheduled?day=n']
 day_id = ['scheduled-day-1', 'scheduled-day-2', 'scheduled-day-3', 'scheduled-day-4', 'scheduled-day-5', 'scheduled-day-6', 'scheduled-day-0', 'scheduled-day-n']
 
-id_list = []
 title_list = []
-author_list = []
-genre_list = []
-tags_list = []
-platform_list = []
-age_list = []
-rate_list = []
-complete_list = []
-thumbnail_list = []
-url_list = []
-num = 0
 
 for i in range(8):
     URL = url + week[i]
@@ -37,11 +26,11 @@ for i in range(8):
 
     tmp = soup.find('ul', {'id' : day_id[i]})
     title = tmp.find_all('div', {'class' : 'lzComic__title'})
-    author = tmp.find_all('span', {'class' : 'lzComic__artist'})
-    genre = tmp.find_all('span', {'class' : 'lzComic__genre'})
-    url_tmp = []
-    for href in tmp.find_all('li', {'class' : 'lzComic__item'}):
-        url_tmp.append(url + href.find('a')['href'])
+    #author = tmp.find_all('span', {'class' : 'lzComic__artist'})
+    #genre = tmp.find_all('span', {'class' : 'lzComic__genre'})
+    #url_tmp = []
+    #for href in tmp.find_all('li', {'class' : 'lzComic__item'}):
+        #url_tmp.append(url + href.find('a')['href'])
     
     p = 0
 
@@ -51,16 +40,16 @@ for i in range(8):
             p += 1
             continue
 
-        id_list.append(num)
-        num += 1
+        #id_list.append(num)
+        #num += 1
         title_list.append(t)
-        author_list.append(author[j].text)
-        genre_list.append(genre[j].text)
-        platform_list.append('레진코믹스')
-        url_list.append(url_tmp[j])
+        #author_list.append(author[j].text)
+        #genre_list.append(genre[j].text)
+        #platform_list.append('레진코믹스')
+        #url_list.append(url_tmp[j])
 
-        driver.get(url_tmp[j])
-        sleep(1)
+        #driver.get(url_tmp[j])
+        #sleep(1)
 
         p += 1
 
@@ -72,33 +61,33 @@ for i in range(8):
         )
         '''
         
-        html = driver.page_source
-        soup = BeautifulSoup(html, 'html.parser')
+        #html = driver.page_source
+        #soup = BeautifulSoup(html, 'html.parser')
 
         '''
         genre = soup.find('span', {'class' : 'comicInfo__category comicInfo__category--genre'})
         genre_list.append(genre)
         '''
 
-        tags = soup.find('div', {'class' : 'comicInfo__tags'}).text.strip()
-        tags_list.append(tags)
+        #tags = soup.find('div', {'class' : 'comicInfo__tags'}).text.strip()
+        #tags_list.append(tags)
 
-        driver.back()
+        #driver.back()
 
         sleep(3)
 
         
 
 total_data = pd.DataFrame()
-total_data['id'] = id_list
+#total_data['id'] = id_list
 total_data['title'] = title_list
-total_data['author'] = author_list
-total_data['genre'] = genre_list
-total_data['tag'] = tags_list
-total_data['platform'] = platform_list
-total_data['age'] = age_list
-total_data['rate'] = rate_list
-total_data['complete'] = complete_list
-total_data['thumbnail'] = thumbnail_list
-total_data['website'] = url_list
-total_data.to_csv('레진코믹스_웹툰.csv', encoding='utf-8-sig')
+#total_data['author'] = author_list
+#total_data['genre'] = genre_list
+#total_data['tag'] = tags_list
+#total_data['platform'] = platform_list
+#total_data['age'] = age_list
+#total_data['rate'] = rate_list
+#total_data['complete'] = complete_list
+#total_data['thumbnail'] = thumbnail_list
+#total_data['website'] = url_list
+total_data.to_csv('레진코믹스_웹툰_연재.csv', encoding='utf-8-sig')
